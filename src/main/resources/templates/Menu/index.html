@@ -2,18 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
+    <h1 th:text="${title}">Default Title</h1>
 
-<nav th:replace="fragments :: navigation"></nav>
-</head>
+    <nav th:replace="fragments :: navigation"></nav>
     <table class="table">
 
         <tr th:each="menu : ${menus}">
             <td>
-            <a th:href="/menu/view/${menu.getId()}" th:text="${menu.name}"></a>
+            <a th:href="@{'/menu/view/' + ${menu.getId()}}" th:text="${menu.name}"></a>
+                <!--"@{/menu/view/${menu.getId()}}"-->
             </td>
         </tr>
 
     </table>
+    <a href="/menu/add">Add New Menu</a>
 </body>
 </html>

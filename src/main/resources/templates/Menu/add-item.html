@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<!--<label th:for="name">Name</label>-->
+<!--<input class="form-control" th:field="*{name}" />-->
+<!--<span th:errors="*{name}" class="error"></span>-->
+
+<form method="post" action="/menu/add-item" style="max-width:600px;" th:object="${form}">
+    <!--<label th:for="cheeseId">Cheese</label>-->
+    <span th:errors="*{cheeseId}" class="error"></span>
+    <div class="form-group">
+        <label th:for="cheeseId">Cheese</label>
+        <select th:field="*{cheeseId}" name="cheeseId">
+            <option th:each="cheese : ${form.getCheeses()}"
+                    th:text="${cheese.getName()}"
+                    th:value="${cheese.getId()}">
+            </option>
+        </select>
+    </div>
+    <input type="hidden" name="menuId" th:value="*{menu.id}" />
+    <div>
+        <input type="submit" value="Add Item" />
+    </div>
+
+<!--<div class="form-group">-->
+    <!--<label th:for="type">Category</label>-->
+    <!--<select name="categoryId">-->
+        <!--<option th:each="category : ${categories}"-->
+                <!--th:text="${category.name}"-->
+                <!--th:value="${category.id}"></option>-->
+    <!--</select>-->
+<!--</div>-->
+</form>
+</body>
+</html>

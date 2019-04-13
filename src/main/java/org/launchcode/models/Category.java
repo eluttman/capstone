@@ -26,7 +26,7 @@ public class Category {
 
     @OneToMany
     @JoinColumn(name = "category_id")
-    private List<Cheese> cheeses = new ArrayList<>();
+    private List<Appointment> appointments = new ArrayList<>();
 
     public int getId() {
         return id;

@@ -6,16 +6,16 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" style="max-width:600px;" th:object="${cheese}">
+<form method="post" style="max-width:400px;" th:object="${appointment}">
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
     </div>
     <div class="form-group">
-        <label th:for="description">Description</label>
-        <input class="form-control" th:field="*{description}" />
-        <span th:errors="*{description}" class="error"></span>
+        <label th:for="timeslot">Date</label>
+        <input class="form-control" th:field="*{timeslot}" />
+        <span th:errors="*{timeslot}" class="error"></span>
     </div>
 
     <div class="form-group">
@@ -27,7 +27,7 @@
         </select>
     </div>
 
-    <input type="submit" value="Add Cheese" />
+    <input type="submit" value="Add Appointment" />
 </form>
 
 </body>

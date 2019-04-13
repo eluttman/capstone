@@ -8,20 +8,20 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
+<p th:unless="${appointments} and ${appointments.size()}">no appointments :(</p>
 
 <table class="table">
 
     <tr>
         <th>Name</th>
-        <th>Description</th>
+        <th>Date</th>
         <th>Category</th>
     </tr>
 
-    <tr th:each="cheese : ${cheeses}">
-        <td th:text="${cheese.name}"></td>
-        <td th:text="${cheese.description}"></td>
-        <td th:text="${cheese.category.name}"></td>
+    <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.name}"></td>
+        <td th:text="${appointment.timeslot}"></td>
+        <td th:text="${appointment.category.name}"></td>
     </tr>
 
 </table>

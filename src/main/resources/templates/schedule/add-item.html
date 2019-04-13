@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" action="/schedule/add-item" style="max-width:400px;" th:object="${form}">
+
+    <span th:errors="*{appointmentId}" class="error"></span>
+    <div class="form-group">
+        <label th:for="appointmentId">Appointment</label>
+        <select th:field="*{appointmentId}" name="appointmentId">
+            <option th:each="appointment : ${form.getAppointments()}"
+                    th:text="${appointment.getName()}"
+                    th:value="${appointment.getId()}">
+            </option>
+        </select>
+    </div>
+    <input type="hidden" name="scheduleId" th:value="*{schedule.id}" />
+    <input type="submit" value="Add Appointment" />
+
+</form>
+</body>
+</html>

@@ -7,14 +7,13 @@
     <nav th:replace="fragments :: navigation"></nav>
     <table class="table">
 
-        <tr th:each="menu : ${menus}">
+        <tr th:each="schedule : ${schedules}">
             <td>
-            <a th:href="@{'/menu/view/' + ${menu.getId()}}" th:text="${menu.name}"></a>
-                <!--"@{/menu/view/${menu.getId()}}"-->
+            <a th:href="@{'/schedule/view/' + ${schedule.getId()}}" th:text="${schedule.name}"></a>
             </td>
         </tr>
 
     </table>
-    <a href="/menu/add">Add New Menu</a>
+    <a href="/schedule/add">Add New Schedule</a>
 </body>
 </html>

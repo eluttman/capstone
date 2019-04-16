@@ -35,10 +35,15 @@ public class Appointment {
     private List<Schedule> schedules;
 
     public int getId() {return id;}
+
     public String getName() {return name;]
+
     public void setName(String name) {this.name = name;}
+
     public int getDate(Integer date) {this.date = date;}
+
     public Category getCategory() {return category}
+
     public void setCategory(Category category) {this.category = category;}
 
     }

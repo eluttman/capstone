@@ -25,8 +25,8 @@ public class HomeController {
     @RequestMapping(value= "")
     public String index(Model model) {
 
-      //  model.addAttribute("appointments", appointmentDao.findAll());
-       // model.addAttribute("name", "My Schedule");
+        model.addAttribute("appointments", appointmentDao.findAll());
+        model.addAttribute("name", "My Schedule");
 
         return "home/index";
     }
@@ -34,42 +34,42 @@ public class HomeController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddAppointmentForm(Model model) {
 
-        //model.addAttribute("title", "Add Appointment");
-        //model.addAttribute(new Appointment());
-        //model.addAttribute("categories", categoryDao.findAll());
+        model.addAttribute("title", "Add Appointment");
+        model.addAttribute(new Appointment());
+        model.addAttribute("categories", categoryDao.findAll());
        return "home/add";
 
-    // @RequestMapping(value = "add", method = RequestMethod.POST)
-     //public String processAddAppointmentForm(@ModelAttribute @Valid Appointment newAppointment,
-       // Errors errors, @RequestParam int categoryId, Model model) {
-         //   if (errors.hasErrors()) {
-           //     model.addAttribute("title", "Add Appointment");
-             //   model.addAttribute(new Appointment());
-               // model.addAttribute("categories", categoryDao.findAll());
-                //return "home/add";
-                //]
-                //Category cat = categoryDao.findOne(categoryId);
-                //newAppointment.setCategory(cat);
+     @RequestMapping(value = "add", method = RequestMethod.POST)
+     public String processAddAppointmentForm(@ModelAttribute @Valid Appointment newAppointment,
+        Errors errors, @RequestParam int categoryId, Model model) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Add Appointment");
+                model.addAttribute(new Appointment());
+                model.addAttribute("categories", categoryDao.findAll());
+                return "home/add";
+                ]
+                Category cat = categoryDao.findOne(categoryId);
+                newAppointment.setCategory(cat);
 
-                //appointmentDao.save(newAppointment);
-                //return "redirect:";
-            //]
-    //@RequestMapping(value = "remove", method = RequestMethod.GET)
-    //public String displayRemoveAppointmentForm(Model model) [
+                appointmentDao.save(newAppointment);
+                return "redirect:";
+            ]
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveAppointmentForm(Model model) [
 
-      //      model.addAttribute("appointments", appointmentsDao.findAll());
-        //    model.addAttribute("title", "Remove Appointment");
-          //  return "home/remove";
-           // ]
+            model.addAttribute("appointments", appointmentsDao.findAll());
+            model.addAttribute("title", "Remove Appointment");
+            return "home/remove";
+            ]
 
-//    @RequestMapping(value = "remove", method = RequestMethod.POST)
-  //  public String processRemoveAppointmentForm(@RequestParam int[] appointmentIds) [
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveAppointmentForm(@RequestParam int[] appointmentIds) [
 
-    //        for (int appointmentId : appointmentIds) {
-      //          appointmentDao.delete(appointmentId);
-        //    }
+            for (int appointmentId : appointmentIds) {
+                appointmentDao.delete(appointmentId);
+            }
 
-         //   return "redirect:";
+            return "redirect:";
 
     }
 

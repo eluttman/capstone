@@ -13,13 +13,13 @@ public class Appointment {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min=3, max=15, message="Name must be between 3 and 15 characters!")
     private String name;
 
     //HOW DO WE GET THIS TO BE A DATE SELECTOR, ETC OR WHAT FORMAT WOULD BE EASIEST TO USE IN THIS OPTION?
     @NotNull
     @Size(min=1, message = "Please Select Date")
-    private Integer date;
+    private int date;
 
     @ManyToOne
     private Category category;
@@ -27,7 +27,7 @@ public class Appointment {
     @ManyToMany(mappedBy = "appointments")
     private List<Schedule> schedules;
 
-    public Appointment(String name, Integer date) {
+    public Appointment(String name, int date) {
         this.name = name;
         this.date = date;
     }
@@ -40,8 +40,8 @@ public class Appointment {
 
     public void setName(String name) { this.name = name; }
 
-    public int getDate(Integer date) { return date; }
-//    public int getDate(Integer date) { this.date = date; }
+    public int getDate() { return date; }
+    public void setDate(int date) { this.date = date; }
 
     public Category getCategory() { return category; }
 

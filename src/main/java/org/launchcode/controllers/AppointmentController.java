@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -82,5 +79,32 @@ public class AppointmentController {
 
         return "redirect:";
     }
+    @RequestMapping(value = "edit/{appointmentId}", method = RequestMethod.GET)
+    public String displayEditAppointmentForm(Model model, @PathVariable int appointmentId) {
 
+        model.addAttribute("title", "Edit Appointment");
+        model.addAttribute("appointment", appointmentDao.findOne(appointmentId));
+        model.addAttribute("categories", categoryDao.findAll());
+        return "appointment/edit";
+    }
+
+    @RequestMapping(value = "edit/{appointmentId}", method = RequestMethod.POST)
+    public String processEditForm(Model model, @PathVariable int appointmentId,
+                                  @ModelAttribute  @Valid Appointment newAppointment,
+                                  @RequestParam int categoryId,
+                                  Errors errors) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Appointment");
+            return "appointment/edit";
+        }
+
+        Appointment editedAppointment = appointmentDao.findOne(appointmentId);
+        editedAppointment.setName(newAppointment.getName());
+        editedAppointment.setDate(newAppointment.getDate());
+        editedAppointment.setCategory(categoryDao.findOne(categoryId));
+        appointmentDao.save(editedAppointment);
+
+        return "redirect:/appointment";
+    }
 }

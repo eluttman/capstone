@@ -20,7 +20,7 @@
 
     <tr th:each="appointment : ${appointments}">
         <td th:text="${appointment.name}"></td>
-        <td th:text="${appointment.timeslot}"></td>
+        <td th:text="${appointment.date}"></td>
         <td th:text="${appointment.category.name}"></td>
     </tr>
 

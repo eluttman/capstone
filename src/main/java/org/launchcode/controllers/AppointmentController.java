@@ -45,28 +45,24 @@ public class AppointmentController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddAppointmentForm(@ModelAttribute  @Valid Appointment newAppointment,
-                                            Errors errors,
-                                            @RequestParam int categoryId,
+                                            Errors errors, @RequestParam int categoryId,
                                             Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Appointment");
-            model.addAttribute(new Appointment());
-            model.addAttribute("categories", categoryDao.findAll());
             return "appointment/add";
         }
 
         Category cat = categoryDao.findOne(categoryId);
         newAppointment.setCategory(cat);
-
         appointmentDao.save(newAppointment);
         return "redirect:";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveAppointmentForm(Model model) {
-        model.addAttribute("appointments", appointmentDao.findAll());
         model.addAttribute("title", "Remove Appointment");
+        model.addAttribute("appointments", appointmentDao.findAll());
         return "appointment/remove";
     }
 

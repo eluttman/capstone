@@ -9,11 +9,6 @@ import java.util.List;
 
 @Entity
 public class Category {
-    public Category(){
-    }
-    public Category(String name) {
-        this.name = name;
-    }
 
     @Id
     @GeneratedValue
@@ -28,15 +23,9 @@ public class Category {
     @JoinColumn(name = "category_id")
     private List<Appointment> appointments = new ArrayList<>();
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 }

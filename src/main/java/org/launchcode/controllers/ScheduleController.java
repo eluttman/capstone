@@ -44,7 +44,7 @@ public class ScheduleController {
 
         model.addAttribute("title", "Add Schedule");
         model.addAttribute(new Schedule());
-        return "menu/add";
+        return "schedule/add";
     }
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid Schedule schedule, Errors errors) {

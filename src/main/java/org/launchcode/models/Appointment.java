@@ -21,8 +21,11 @@ public class Appointment {
     @Size(min=1, message = "Please Select Date")
     private Integer date;
 
-    @OneToMany
+    @ManyToOne
     private Category category;
+
+    @ManyToMany(mappedBy = "appointments")
+    private List<Schedule> schedules;
 
     public Appointment(String name, Integer date) {
         this.name = name;
@@ -30,9 +33,6 @@ public class Appointment {
     }
 
     public Appointment() { }
-
-    @ManyToMany(mappedBy = "appointments")
-    private List<Schedule> schedules;
 
     public int getId() {return id;}
 

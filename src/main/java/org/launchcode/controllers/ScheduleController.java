@@ -2,7 +2,10 @@ package org.launchcode.controllers;
 
 
 import org.launchcode.models.Appointment;
+import org.launchcode.models.Schedule;
+import org.launchcode.models.data.AppointmentDao;
 import org.launchcode.models.data.CategoryDao;
+import org.launchcode.models.data.ScheduleDao;
 import org.launchcode.models.forms.AddScheduleItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,8 +34,8 @@ public class ScheduleController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
 
-        model.addAttribute("schedules", scheduleDao.findAll());
         model.addAttribute("title", "Schedules");
+        model.addAttribute("schedules", scheduleDao.findAll());
 
         return "schedule/index";
     }
@@ -53,12 +56,14 @@ public class ScheduleController {
         scheduleDao.save(schedule);
         return "redirect:view/" + schedule.getId();
     }
+
     @RequestMapping(value = "add-item/(id)", method = RequestMethod.GET)
     public String addItem(Model model, @PathVariable int id) {
+
         Schedule schedule = scheduleDao.findOne(id);
 
         Iterable<Appointment> appointments = appointmentDao.findAll();
-        AddScheduleItemForm form = new AddScheduleItemForm(Schedule, Appointments);
+        AddScheduleItemForm form = new AddScheduleItemForm(appointments, schedule);
 
         model.addAttribute("title", "Add appointment to schedule:" + schedule.getName());
         model.addAttribute("schedule", schedule);
@@ -67,16 +72,18 @@ public class ScheduleController {
         return "schedule/add-item";
     }
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
-    public String addItem(Model model, @ModelAttribute @Valid AddScheduleItemForm form, Errors errors) {
+    public String addItem(Model model, @ModelAttribute @Valid AddScheduleItemForm itemForm, Errors errors) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add appointment to schedule:" + schedule.getName());
-            model.addAttribute("schedule", schedule);
-            model.addAttribute("form", form);
+            model.addAttribute("title", "Add appointment");
+//            model.addAttribute("schedule", schedule);
+            model.addAttribute("form", itemForm);
             return "schedule/add-item";
         }
 
-        Appointment appointment = appointmentDao.findOne(form.getAppointmentId());
+        Schedule schedule = scheduleDao.findOne(itemForm.getScheduleId());
+        Appointment appointment = appointmentDao.findOne(itemForm.getAppointmentId());
+
         schedule.addItem(appointment);
         scheduleDao.save(schedule);
 

@@ -15,7 +15,7 @@ public class AddScheduleItemForm {
 
     public  void setSchedule(Schedule schedule) {this.schedule = schedule;}
 
-    public void setAppointments(Iterable<Appointment> appointments) {this.Appointment = Appointment;}
+    public void setAppointment(Iterable<Appointment> appointments) {this.appointments = appointments;}
 
     public void setAppointmentId (int appointmentId) {this.appointmentId = appointmentId;}
 
@@ -23,19 +23,19 @@ public class AddScheduleItemForm {
     private int appointmentId;
     public AddScheduleItemForm() {}
 
-    public AddScheduleItemForm(Schedule schedule, Iterable<Appointment> appointments) {
-        this.schedule = schedule;
+    public AddScheduleItemForm(Iterable<Appointment> appointments, Schedule schedule) {
         this.appointments = appointments;
+        this.schedule = schedule;
     }
 
-    public Schedule getSchedule() {return schedule};
+    public Schedule getSchedule() { return schedule; }
 
-    public void setScheduleId(int scheduleId) {this.scheduleId = scheduleId;}
+    public void setScheduleId(int scheduleId) { this.scheduleId = scheduleId; }
 
-    public Iterable getAppointments() { return appointments; ]
+    public Iterable getAppointments() { return appointments; }
 
-    public int getScheduleIf() [ return scheduleId;]
+    public int getScheduleId() { return scheduleId; }
 
-    public int getAppointmentId() {return appointmentId;]
+    public int getAppointmentId() { return appointmentId; }
 
 }

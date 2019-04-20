@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Date;
 
 @Entity
 public class Appointment {
@@ -18,7 +19,7 @@ public class Appointment {
 
     //HOW DO WE GET THIS TO BE A DATE SELECTOR, ETC OR WHAT FORMAT WOULD BE EASIEST TO USE IN THIS OPTION?
     @NotNull
-    @Size(min=1, message = "Please Select Date")
+//    @Size(min=1, message = "Please Select Date")
     private int date;
 
     @ManyToOne
